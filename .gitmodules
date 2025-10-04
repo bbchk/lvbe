@@ -1,0 +1,3 @@
+[submodule "ops/common/lvops"]
+	path = ops/common/lvops
+	url = git@github.com:bbchk/lvops.git
