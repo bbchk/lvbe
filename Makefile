@@ -80,6 +80,9 @@ clean: down
 
 # == Auxiliary targets below ======================
 
+update-submodules:
+	git submodule update --init --recursive
+
 $(compose_file_custom):
 	touch "$(compose_file_custom)"
 
