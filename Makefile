@@ -1,6 +1,8 @@
 .DEFAULT_GOAL := help
 .PHONY: .env create-network setup build install up down clean
 
+# include /ops/common/makefile
+
 .ONESHELL:
 .SHELLFLAGS := -eu -c
 SHELL := bash
