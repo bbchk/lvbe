@@ -13,7 +13,7 @@
     "url": "https://github.com/bbchk/lvbe.git"
   },
   "imports": {
-    "#src/*": "./src/*"
+    "#root/*": "./*"
   },
   "scripts": {
     "start": "node server.js",

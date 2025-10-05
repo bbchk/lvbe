@@ -1,4 +1,6 @@
 import express from 'express'
+import * as controller from '#root/controllers/index.js'
+
 // import { requireAuth, isAdmin } from '../middleware/auth.js'
 
 // import { createCategory } from '#src/controllers/category/create.category_controller.js'
@@ -13,15 +15,14 @@ import express from 'express'
 // import cacheFor from '#src/middleware/cache.js'
 
 const router = express.Router()
-const chRouter = express.Router()
+// const chRouter = express.Router()
 
 // export const getCategories = asyncErrorHandler(async (req, res, next) => {
 //   const categories = await categoryService.getCategories()
 //
 //   res.status(200).json(categories)
 // })
-
-router.get('/', (req, res, next) => {return res.status(200).json(["hello", "that's", "back"])} )
+router.get('/', controller.category.get.all)
 
 // chRouter.get('/root', getRootCategories)
 // chRouter.get('/category/by-path/:path', getCategoryByPath)
