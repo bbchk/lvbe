@@ -10,7 +10,7 @@ process.on('uncaughtException', (err) => {
 })
 
 import app from './app.js'
-const server = app.listen(3001, () => {
+const server = app.listen(3000, () => {
 // const server = app.listen(process.env.PORT, () => {
   // ml.info(`Server is listening on port ${process.env.PORT}`)
 })

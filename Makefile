@@ -5,7 +5,7 @@
 
 compose_project_name = lvbe
 
-app_port = 3000
+app_port = 3001
 app_target = development
 app_image = lvbe
 
