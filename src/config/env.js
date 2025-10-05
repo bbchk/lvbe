@@ -29,4 +29,4 @@ const db = {
   ALLOW_EXIT_ON_IDLE:     e.APP_ENV !== 'production',
 };
 
-export { app, log, db };
+export default { app, log, db };

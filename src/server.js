@@ -1,12 +1,14 @@
 import app from '#root/app.js';
-import { app } from '#root/config/env.js';
 
-const server = app.listen(app.PORT, () => {
+import env from '#root/config/env.js';
+import dbPool from '#root/config/db.js';
+
+const server = app.listen(env.app.PORT, () => {
   // ml.info(`Server is listening on port ${process.env.PORT}`)
 });
 
-const cleanupSignals = ['SIGINT', 'SIGTERM', 'SIGTSTP', 'SIGQUIT', 'unhandledRejection', 'uncaughtException'];
-cleanupSignals.forEach((signal) => {
+const gracefulShutdownSignals = ['SIGINT', 'SIGTERM', 'SIGTSTP', 'SIGQUIT', 'unhandledRejection', 'uncaughtException'];
+gracefulShutdownSignals.forEach((signal) => {
   process.on(signal, (error) => {
     // ml.info(`Received ${signal}`)
 
@@ -17,7 +19,7 @@ cleanupSignals.forEach((signal) => {
 
 async function shutServerGracefully(server, exitCode = 0) {
   // ml.info(`Server is closing on port ${process.env.PORT}`)
-  // await pool.end()
+  await dbPool.end()
 
   server.close(function (err) {
     if (err) {
