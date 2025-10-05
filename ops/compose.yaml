@@ -1,8 +1,11 @@
+include:
+  - ./common/lvops/compose.yaml
+
 services:
   app:
     image: ${APP_IMAGE:-}
     platform: linux/amd64
-    hostname: lvfe
+    hostname: lvbe
     build:
       context: ..
       target: ${APP_TARGET}
@@ -10,35 +13,29 @@ services:
       args:
         APP_GROUP_ID: ${APP_GROUP_ID:-1000}
         APP_USER_ID: ${APP_USER_ID:-1000}
-    env_file:
-      - ../.env
+    # env_file:
+    #   - ../.env
     ports:
-      - ${APP_PORT:-3000}:3000
-      - ${DEBUG_PORT:-9000}:9000
+      - ${APP_PORT:-3001}:3000
     volumes:
       - ../src:/var/www/app
 
-    # db:
-    #     user: postgres
-    #     image: postgres:latest
-    #     platform: linux/amd64
-    #     hostname: jvfr-db
-    #     ports:
-    #       - "${DB_PORT:-5444}:5432"
-    #     volumes:
-    #         - ./sql:/docker-entrypoint-initdb.d/
-    #     environment:
-    #         POSTGRES_USER: jvfr-admin
-    #         POSTGRES_PASSWORD: jvfr-admin
-    #         POSTGRES_DB: jvfr
-    #     healthcheck:
-    #         test: ['CMD-SHELL', 'pg_isready -q -d $${POSTGRES_DB} -U $${POSTGRES_USER}']
-    #         interval: 30s
-    #         timeout: 10s
-    #         retries: 3
-    #         start_period: 30s
-
-networks:
-  default:
-    external: true
-    name: lv
+    db:
+        user: postgres
+        image: postgres:latest
+        platform: linux/amd64
+        hostname: lvbe-db
+        ports:
+          - "${DB_PORT:-5433}:5432"
+        volumes:
+            - ./db:/docker-entrypoint-initdb.d/
+        environment:
+            POSTGRES_USER: lvbe
+            POSTGRES_PASSWORD: lvbe
+            POSTGRES_DB: lvbe
+        healthcheck:
+            test: ['CMD-SHELL', 'pg_isready -q -d $${POSTGRES_DB} -U $${POSTGRES_USER}']
+            interval: 30s
+            timeout: 10s
+            retries: 3
+            start_period: 30s

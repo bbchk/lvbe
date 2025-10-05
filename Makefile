@@ -1,12 +1,5 @@
-# =========================================
-#
-# This Makefile includes common operational targets and configurations
-# from the shared parent file: ops/common/lvops/Makefile
-
+# This Makefile includes common operational targets and configurations from:
 -include ./ops/common/lvops/Makefile
-
-# All the targets and configurations specified here
-# are specific to this application
 
 # == Variables below ======================
 
