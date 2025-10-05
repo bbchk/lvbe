@@ -5,7 +5,8 @@ const e = process.env;
 const app = {
   ENV:                    e.APP_ENV || 'production',
   PORT:                   3000,
-  EXIT_ERROR_CODE:        1
+  EXIT_ERROR_CODE:        1,
+  EXIT_SUCCESS_CODE:      1
 };
 
 const log = {

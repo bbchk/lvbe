@@ -1,4 +1,4 @@
-import service from '#root/services/index.js';
+import service from '#root/services/index.export.js';
 
 const all = async (req, res, next) => {
   const categories = await service.category.get.all();

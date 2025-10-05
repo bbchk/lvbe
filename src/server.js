@@ -1,12 +1,16 @@
 import app from '#root/app.js';
 
-import env from '#root/config/env.js';
+import cfg from '#root/config/cfg.js';
 
-import registerServerShutdownHandlers from '#root/utils/server.shutdownHandlers.js';
+import utils from '#root/utils/index.export.js';
 
-const server = app.listen(env.app.PORT, () => {
+const server = app.listen(cfg.app.PORT, () => {
   // ml.info(`Server is listening on port ${process.env.PORT}`)
 });
 
 // TODO: utils.registerServerShutdownHandlers
 registerServerShutdownHandlers(server);
+
+// server.handleExitEvents();
+
+utils.server.handleExitEvents(server);
