@@ -1,12 +1,20 @@
-import * as service from '#root/services/index.js';
-import { asyncErrorHandler } from '#root/utils/async_error_handler.js'
+import service from '#root/services/index.js';
 
-const all = asyncErrorHandler(async (req, res, next) => {
+const all = async (req, res, next) => {
   const categories = await service.category.get.all();
   res.status(200).json(categories);
-});
+};
 
 export default { all };
+
+// import { asyncErrorHandler } from '#root/utils/async_error_handler.js'
+
+// const all = asyncErrorHandler(async (req, res, next) => {
+//   const categories = await service.category.get.all();
+//   res.status(200).json(categories);
+// });
+
+
 
 // import _Error from '#src/utils/error.js'
 

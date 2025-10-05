@@ -1,5 +1,11 @@
-import express from 'express'
-import * as controller from '#root/controllers/index.js'
+import express from 'express';
+import controller from '#root/controllers/index.js';
+
+const router = express.Router();
+
+router.get('/', controller.category.get.all);
+
+export { router as categoryRoutes };
 
 // import { requireAuth, isAdmin } from '../middleware/auth.js'
 
@@ -13,17 +19,7 @@ import * as controller from '#root/controllers/index.js'
 // } from '#src/controllers/category/get.category_controller.js'
 
 // import cacheFor from '#src/middleware/cache.js'
-
-const router = express.Router()
-// const chRouter = express.Router()
-
-// export const getCategories = asyncErrorHandler(async (req, res, next) => {
-//   const categories = await categoryService.getCategories()
 //
-//   res.status(200).json(categories)
-// })
-router.get('/', controller.category.get.all)
-
 // chRouter.get('/root', getRootCategories)
 // chRouter.get('/category/by-path/:path', getCategoryByPath)
 // chRouter.get(
@@ -38,5 +34,3 @@ router.get('/', controller.category.get.all)
 
 // router.post('/', createCategory)
 // router.patch('/:id', updateCategory)
-
-export { router as categoryRoutes }
