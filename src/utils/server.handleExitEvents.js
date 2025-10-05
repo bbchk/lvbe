@@ -1,4 +1,4 @@
-import { dbPool } from '#root/config/db.js';
+import dbPool from '#root/config/db.js';
 import cfg from '#root/config/cfg.js';
 
 let IS_ALREADY_SHUTTING_DOWN = false;

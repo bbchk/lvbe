@@ -1,6 +1,6 @@
-import shutdown from '#root/utils/get.category.controller.js';
+import handleExitEvents from '#root/utils/server.handleExitEvents.js';
 const server = {
-  bindToExitEvents: shutdown,
+  handleExitEvents,
 };
 
 export default { server };
