@@ -20,7 +20,6 @@ export default function handleExitEvents() {
 
   process.on('unhandledRejection', (reason) => {
     utils.log.debug('Unhandled Rejection:', reason);
-
     shutdownGracefully.call(this, cfg.app.EXIT_ERROR_CODE);
   });
 

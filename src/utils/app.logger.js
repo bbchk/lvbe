@@ -54,16 +54,6 @@ const format = {
     censor: '[REDACT]',
   },
   timestamp: () => `,"timestamp":"${new Date(Date.now()).toISOString()}"`,
-
-  // TODO!: ✅ ❌
-  // hooks: {
-  //   logMethod(args, method) {
-  //     if (method === 'warn') {
-  //       args[0] = `⚠️ ${args[0]}`;
-  //     }
-  //     return method.apply(this, args);
-  //   },
-  // },
 };
 
 const logger = pino({
