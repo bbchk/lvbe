@@ -1,4 +1,17 @@
 # lvbe
 Live world back-end
 
-containarize
+  "_id": uuid
+    parent_uuid
+  "name": "Для Собак", | string
+  "order": 0, | 
+  "path": "Для Собак",
+  "image": "https://storage.googleapis.com/live_world/categories/dlya_sobak.jpg",
+  "filters": [ 
+    "Бренд",
+    "Країна реєстрації бренду",
+    "Країна-виробник товару"
+  ]
+
+having our server we could store images locally.
+establish parent to child connection between categories with parent_uuid

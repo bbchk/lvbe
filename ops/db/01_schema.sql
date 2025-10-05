@@ -1,0 +1,19 @@
+-- Create the categories table with the self-referencing foreign key
+
+CREATE TABLE categories (
+    uuid UUID PRIMARY KEY,
+    parent_uuid UUID,
+    name VARCHAR(255) NOT NULL,
+    priority INT,
+    breadcrumb VARCHAR(255),
+    image VARCHAR(255),
+    filters JSONB,
+
+    CONSTRAINT fk_parent_category
+        FOREIGN KEY (parent_uuid)
+        REFERENCES categories(uuid)
+        ON DELETE SET NULL
+);
+
+-- Create an index on parent_id for faster lookups of children
+CREATE INDEX idx_category_parent_uuid ON categories (parent_uuid);
