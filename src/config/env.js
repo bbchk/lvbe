@@ -1,21 +1,32 @@
-//=== General below ==============================
-const APP_ENV = process.env.APP_ENV || 'production';
-const LOG_LEVEL = process.env.LOG_LEVEL || 'info';
+const e = process.env;
 
-//=== Database below ==============================
-const DB_PORT = process.env.DB_PORT || '5432';
-const DB_HOST = process.env.DB_HOST || 'lvbe-db';
-const DB_USER = process.env.DB_USER || 'lvbe';
-const DB_PASS = process.env.DB_PASS || 'lvbe';
-const DB_NAME = process.env.DB_NAME || 'lv';
+//=== General =====================================
 
-export {
-  APP_ENV,
-  LOG_LEVEL,
-
-  DB_PORT,
-  DB_HOST,
-  DB_USER,
-  DB_PASS,
-  DB_NAME,
+const app = {
+  ENV:                    e.APP_ENV || 'production',
+  PORT:                   3000,
+  EXIT_ERROR_CODE:        1
 };
+
+const log = {
+  LEVEL:                  e.LOG_LEVEL || 'info',
+};
+
+//=== Database =====================================
+const db = {
+  PORT:                   Number(e.DB_PORT) || 5432,
+  HOST:                   e.DB_HOST || 'lvbe-db',
+  USER:                   e.DB_USER || 'lvbe',
+  PASS:                   e.DB_PASS || 'lvbe',
+  NAME:                   e.DB_NAME || 'lv',
+
+  MAX_POOL:               Number(e.DB_MAX_POOL) || 20,
+  MIN_POOL:               Number(e.DB_MIN_POOL) || 0,
+  CONNECT_TIMEOUT_MILS:   Number(e.DB_CONNECT_TIMEOUT_MILS) || 5_000,
+  IDLE_TIMEOUT_MILS:      Number(e.DB_IDLE_TIMEOUT_MILS) || 30_000,
+  MAX_LIFETIME_SECS:      Number(e.DB_MAX_LIFETIME_SECS) || 0,
+
+  ALLOW_EXIT_ON_IDLE:     e.APP_ENV !== 'production',
+};
+
+export { app, log, db };

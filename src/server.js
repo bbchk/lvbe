@@ -1,54 +1,29 @@
-// import { mainLogger as ml } from './utils/loggers.js'
-// import { cleanup } from './utils/server_cleanup.js'
-import { Client, Pool } from 'pg';
+import app from '#root/app.js';
+import { app } from '#root/config/env.js';
 
-import * as env from '#root/config/env.js';
-
-// TODO: move to constants
-const ERROR_EXIT_CODE = 1;
-
-process.on('uncaughtException', (err) => {
-  // ml.error(`UncaughtException occured. ${err.message}`)
-  process.exit(ERROR_EXIT_CODE);
-});
-
-import app from './app.js';
-const server = app.listen(3000, () => {
-  // const server = app.listen(process.env.PORT, () => {
+const server = app.listen(app.PORT, () => {
   // ml.info(`Server is listening on port ${process.env.PORT}`)
 });
 
-const cleanupSignals = ['SIGINT', 'SIGTERM', 'SIGTSTP', 'SIGQUIT'];
+const cleanupSignals = ['SIGINT', 'SIGTERM', 'SIGTSTP', 'SIGQUIT', 'unhandledRejection', 'uncaughtException'];
 cleanupSignals.forEach((signal) => {
-  process.on(signal, () => {
+  process.on(signal, (error) => {
     // ml.info(`Received ${signal}`)
-    cleanup(server);
+
+    // TODO: pass exit code depending on circumctances
+    shutServerGracefully(server);
   });
 });
 
-process.on('unhandledRejection', (err) => {
-  // ml.error(err.message)
-  cleanup(server, ERROR_EXIT_CODE);
-});
+async function shutServerGracefully(server, exitCode = 0) {
+  // ml.info(`Server is closing on port ${process.env.PORT}`)
+  // await pool.end()
 
-const pool = new Pool({
-  user: env,
-  host: 'localhost',
-  database: 'lv',
-  password: 'lvbe',
-  port: 5432,
-});
-const res = await pool.query('SELECT * FROM lv.categories');
-
-// TODO: replace with POSTGRES;
-// mongoose
-//   .connect(process.env.MONGODB_URI)
-//   .then(() => {
-//     // ml.info('Connected to MongoDB Successfully')
-//   })
-//   .catch(async (err) => {
-//     //? why is it important to explicitly do: await mongoose.connection.close();
-//     ml.error(err.message)
-//     //todo try to connect again after timeout
-//     await cleanup(server, ERROR_EXIT_CODE)
-//   })
+  server.close(function (err) {
+    if (err) {
+      // ml.error(err.message)
+      process.exit(app.EXIT_ERROR_CODE)
+    }
+    process.exit(exitCode)
+  })
+}
