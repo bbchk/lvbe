@@ -1,6 +1,7 @@
--- Create the categories table with the self-referencing foreign key
+CREATE SCHEMA lv;
 
-CREATE TABLE categories (
+-- Create the categories table with the self-referencing foreign key
+CREATE TABLE lv.categories (
     uuid UUID PRIMARY KEY,
     parent_uuid UUID,
     name VARCHAR(255) NOT NULL,
@@ -11,9 +12,9 @@ CREATE TABLE categories (
 
     CONSTRAINT fk_parent_category
         FOREIGN KEY (parent_uuid)
-        REFERENCES categories(uuid)
+        REFERENCES lv.categories(uuid)
         ON DELETE SET NULL
 );
 
--- Create an index on parent_id for faster lookups of children
-CREATE INDEX idx_category_parent_uuid ON categories (parent_uuid);
+-- Create an index under the same schema
+CREATE INDEX idx_category_parent_uuid ON lv.categories (parent_uuid);
