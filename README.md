@@ -15,3 +15,6 @@ Live world back-end
 
 having our server we could store images locally.
 establish parent to child connection between categories with parent_uuid
+use camelCase in pqsl db
+
+finish database and retrieve real data in getCategories endpoint 
