@@ -17,7 +17,8 @@ clean: down
 # == Auxiliary targets below ======================
 
 .env: $(compose_file_custom)
-	cp -i src/.env.example src/.env || true
+	cp -i src/.env.dev.example src/.env.dev || true
+
 	cp -i <(cat <<<' # Build-related env variables
 		APP_PORT="$(app_port)"
 		APP_IMAGE="$(app_image)"

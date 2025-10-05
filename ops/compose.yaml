@@ -13,8 +13,8 @@ services:
       args:
         APP_GROUP_ID: ${APP_GROUP_ID:-1000}
         APP_USER_ID: ${APP_USER_ID:-1000}
-    # env_file:
-    #   - ../.env
+    env_file:
+      - ../src/.env.dev
     ports:
       - ${APP_PORT:-3001}:3000
     volumes:

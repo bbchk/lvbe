@@ -16,11 +16,11 @@ const log = {
 
 //=== Database =====================================
 const db = {
-  PORT:                   Number(e.DB_PORT) || 5432,
   HOST:                   e.DB_HOST || 'lvbe-db',
+  PORT:                   Number(e.DB_PORT) || 5432,
+  NAME:                   e.DB_NAME || 'lv',
   USER:                   e.DB_USER || 'lvbe',
   PASS:                   e.DB_PASS || 'lvbe',
-  NAME:                   e.DB_NAME || 'lv',
 
   MAX_POOL:               Number(e.DB_MAX_POOL) || 20,
   MIN_POOL:               Number(e.DB_MIN_POOL) || 0,
