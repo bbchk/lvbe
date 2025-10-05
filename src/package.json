@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.26.0",
+    "@faker-js/faker": "^10.0.0",
     "eslint": "^9.25.1",
     "eslint-config-prettier": "^10.1.2",
     "eslint-plugin-import": "^2.31.0",
@@ -35,6 +36,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",
+    "pg": "^8.16.3",
     "pino": "^9.11.0"
   }
 }
