@@ -4,7 +4,7 @@ import cfg from '#root/config/cfg.js';
 
 const levels = {
   useOnlyCustomLevels: true,
-  usecustomLevels: {
+  customLevels: {
     emerg: 80,
     alert: 70,
     crit: 60,
@@ -54,6 +54,16 @@ const format = {
     censor: '[REDACT]',
   },
   timestamp: () => `,"timestamp":"${new Date(Date.now()).toISOString()}"`,
+
+  // TODO!: ✅ ❌
+  // hooks: {
+  //   logMethod(args, method) {
+  //     if (method === 'warn') {
+  //       args[0] = `⚠️ ${args[0]}`;
+  //     }
+  //     return method.apply(this, args);
+  //   },
+  // },
 };
 
 const logger = pino({

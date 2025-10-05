@@ -3,4 +3,8 @@ const server = {
   handleExitEvents,
 };
 
-export default { server };
+// const app = {
+// }
+
+import log from '#root/utils/app.logger.js';
+export default { server, log };

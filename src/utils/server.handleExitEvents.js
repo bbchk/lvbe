@@ -1,6 +1,8 @@
 import dbPool from '#root/config/db.js';
 import cfg from '#root/config/cfg.js';
 
+import utils from '#root/utils/index.export.js';
+
 let IS_ALREADY_SHUTTING_DOWN = false;
 
 export default function handleExitEvents() {
@@ -17,13 +19,13 @@ export default function handleExitEvents() {
   });
 
   process.on('unhandledRejection', (reason) => {
-    // console.error('⚠️  Unhandled Rejection:', reason);
+    utils.log.debug('Unhandled Rejection:', reason);
 
     shutdownGracefully.call(this, cfg.app.EXIT_ERROR_CODE);
   });
 
   process.on('uncaughtException', (err) => {
-    // console.error('⚠️  Uncaught Exception:', err);
+    utils.log.debug('Uncaught Exception:', err);
     shutdownGracefully.call(this, cfg.app.EXIT_ERROR_CODE);
   });
 }
@@ -32,23 +34,23 @@ async function shutdownGracefully(exitCode = cfg.app.EXIT_SUCCESS_CODE) {
   if (IS_ALREADY_SHUTTING_DOWN) return;
   IS_ALREADY_SHUTTING_DOWN = true;
 
-  // console.log(`⚡ Server is shutting down on port ${process.env.PORT || 3000}`);
+  utils.log.warn(`Server is shutting down on port ${process.env.PORT || 3000}`);
 
   try {
     await dbPool.end();
-    // console.log('✅ Database pool closed.');
+    utils.log.debug('Database pool closed.');
   } catch (err) {
-    // console.error('❌ Error closing database pool:', err);
+    utils.log.debug('Error closing database pool:', err);
     exitCode = cfg.app.EXIT_ERROR_CODE;
   }
 
   this.close((err) => {
     if (err) {
-      // console.error('❌ Error closing HTTP server:', err);
+      utils.log.debug('Error closing HTTP server:', err);
       exitCode = cfg.app.EXIT_ERROR_CODE;
     }
 
-    // console.log(`✅ Server closed. Exiting with code ${exitCode}`);
+    utils.log.warn(`Server closed. Process exiting with code ${exitCode}`);
     process.exit(exitCode);
   });
 }
