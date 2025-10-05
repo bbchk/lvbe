@@ -11,6 +11,7 @@ const app = {
 
 const log = {
   LEVEL:                  e.LOG_LEVEL || 'info',
+  IS_PRETTY:              e.APP_ENV === 'development'
 };
 
 //=== Database =====================================
