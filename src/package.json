@@ -18,7 +18,13 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
-    "db:seed": "node db/seeders/index.js"
+    "db:seed": "node db/seeders/index.js",
+    "db:migrate": "node db/migrations/index.js",
+    "db:migrate:refresh": "??? Rolls back all migrations and then runs them again",
+    "db:migrate:status": "!!!",
+    "db:migrate:fresh": "!!! Drops all tables from the database and then runs the migrate command.",
+    "db:migrate:rollback": "!!! Rolls back the last batch of migrations.",
+    "make:migration": "node db/migrations/index.js"
   },
   "devDependencies": {
     "@eslint/js": "^9.26.0",

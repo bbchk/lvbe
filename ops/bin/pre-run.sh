@@ -9,5 +9,6 @@ Node version: $(node -v) \n
 ----------------\n
 Current environment:  \n
 ----------------\n"
+# run migrations
 
 exec "$@"

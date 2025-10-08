@@ -29,9 +29,14 @@ clean: down
 		APP_USER_ID="$(APP_USER_ID)"'
 	) .env || true
 
-install-deps:
+install.deps:
 	docker compose run --no-deps --rm app -- pnpm install --frozen-lockfile
 
 # == QoL targets below ======================
 
 help: help-primary help-auxiliary help-qol
+
+# == Database targets below ======================
+
+db.seed:
+	docker compose run app bash -e 'pnpm run db:seed'

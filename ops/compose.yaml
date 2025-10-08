@@ -39,6 +39,7 @@ services:
     ports:
       - '${DB_PORT:-5433}:5432'
     volumes:
+      - postgres_data:/var/lib/postgresql/data
       - ./db:/docker-entrypoint-initdb.d/
     environment:
       POSTGRES_USER: lvbe
