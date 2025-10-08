@@ -17,7 +17,8 @@
   },
   "scripts": {
     "start": "node server.js",
-    "dev": "node --watch server.js"
+    "dev": "node --watch server.js",
+    "db:seed": "node db/seeders/index.js"
   },
   "devDependencies": {
     "@eslint/js": "^9.26.0",

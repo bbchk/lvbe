@@ -1,16 +1,9 @@
 import { Client } from 'pg';
 import { faker } from '@faker-js/faker';
 
-const client = new Client({
-  user: 'lvbe',
-  host: 'localhost',
-  database: 'lv',
-  password: 'lvbe',
-  port: 5433,
-});
-await client.connect();
+import dbPool from "../config/db.js"
 
-function generateCategory({ parentUuid = null, priority = 1, filters = [], parentName = '' }) {
+function genCategory({ parentUuid = null, priority = 1, filters = [], parentName = '' }) {
   const uuid = faker.string.uuid();
   const name = faker.commerce.department();
   const breadcrumb = parentUuid ? `${parentName} > ${name}` : name;
@@ -37,12 +30,12 @@ for (let i = 0; i < 10; i++) {
   const image = faker.image.url();
   const filters = JSON.stringify(['Filter1', 'Filter2']);
 
-  await client.query(
+  await dbPool.query(
     `INSERT INTO lv.categories (uuid, parent_uuid, name, priority, breadcrumb, image, filters)
      VALUES ($1, $2, $3, $4, $5, $6, $7)`,
     [uuid, parent_uuid, name, priority, breadcrumb, image, filters],
   );
 }
 
-await client.end();
+await dbPool.end();
 console.log('Test categories inserted!');
