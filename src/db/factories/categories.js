@@ -1,3 +1,5 @@
+import { faker } from '@faker-js/faker';
+
 function one(overrides = {}) {
   const base = {
     uuid: faker.string.uuid(),

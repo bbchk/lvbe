@@ -46,7 +46,7 @@ async function seeder() {
     );
   }
 
-  // TODO: logging in seeders and factories
+  // TODO: loggingin seeders and factories
   // console.log(`✅ Inserted 1 parent and ${children.length} child categories`);
 }
 
